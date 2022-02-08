@@ -1,9 +1,19 @@
 <template>
-  <div>
-    <p>dela</p>
-  </div>
+  <div>{{ categories }}</div>
 </template>
 
 <script>
-export default {}
+import { mapActions, mapState } from 'vuex';
+export default {
+  async created() {
+    await this.loadCategories();
+    console.log('prvo', this.categories);
+  },
+  computed: {
+    ...mapState(['categories']),
+  },
+  methods: {
+    ...mapActions(['loadCategories']),
+  },
+};
 </script>
