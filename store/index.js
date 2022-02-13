@@ -1,12 +1,30 @@
-const apiRoot = 'http://localhost:8081/api';
+import { getCategories, getUsers } from '../services/service';
 
 export const state = () => ({
   categories: [],
+  users: [],
+  currentUser: null,
 });
 
 export const getters = {
   getCategories(state) {
     return state.categories;
+  },
+  getUsers(state) {
+    return state.users;
+  },
+  getCurrentUser(state) {
+    return state.currentUser;
+  },
+  getUsernames(state) {
+    const usernames = [];
+    state.users.forEach((user) => {
+      usernames.push(user.username);
+    });
+    return usernames;
+  },
+  getUserByUsername: (state) => (username) => {
+    return state.users.find((user) => user.username === username);
   },
 };
 
@@ -14,17 +32,24 @@ export const mutations = {
   loadCategories(state, categories) {
     state.categories = categories;
   },
+  loadUsers(state, users) {
+    state.users = users;
+  },
+  setCurrentUser(state, user) {
+    state.currentUser = user;
+  },
 };
 
 export const actions = {
   async loadCategories({ commit }) {
-    try {
-      const { data: categories } = await this.$axios.get(
-        `${apiRoot}/categories`
-      );
-      commit('loadCategories', categories.data);
-    } catch (err) {
-      commit('loadCategories', []);
-    }
+    const categories = await getCategories();
+    commit('loadCategories', categories);
+  },
+  async loadUsers({ commit }) {
+    const users = await getUsers();
+    commit('loadUsers', users);
+  },
+  async setCurrentUser({ commit }, user) {
+    commit('setCurrentUser', user);
   },
 };

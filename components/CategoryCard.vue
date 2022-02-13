@@ -28,7 +28,7 @@ export default {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-  -webkit-filter: grayscale(0.65);
+  -webkit-filter: grayscale(0.5);
 
   img {
     max-width: 260px;

@@ -2,7 +2,7 @@
   <div class="form-container">
     <h1>Login form</h1>
 
-    <b-form @submit="onSubmit" v-if="show">
+    <b-form @submit="onSubmit">
       <b-form-group id="input-group-1" label="Username" label-for="input-1">
         <b-form-input
           id="input-1"
@@ -16,21 +16,28 @@
         <b-form-input
           id="input-2"
           type="password"
-          v-model="form.name"
+          v-model="form.password"
           placeholder="Enter password"
           required
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <nuxt-link to="register">
-        <b-button type="reset" variant="danger">Register</b-button>
-      </nuxt-link>
+      <p class="form-container__message" ref="message">{{ message }}</p>
+
+      <div class="form-container__buttons">
+        <b-button type="submit" variant="primary">Login</b-button>
+        <nuxt-link to="register">
+          <b-button variant="danger">Register</b-button>
+        </nuxt-link>
+      </div>
     </b-form>
   </div>
 </template>
 
 <script>
+import { loginUser } from '../services/service';
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   data() {
     return {
@@ -38,13 +45,32 @@ export default {
         username: '',
         password: '',
       },
-      show: true,
+      message: '',
     };
   },
+  created() {
+    this.setCurrentUser(null);
+  },
+  computed: {
+    ...mapGetters(['getUsernames', 'getUserByUsername']),
+  },
   methods: {
-    onSubmit(event) {
+    ...mapActions(['setCurrentUser']),
+    async onSubmit(event) {
       event.preventDefault();
-      console.log(this.form);
+
+      const loginDetails = {
+        username: this.form.username,
+        password: this.form.password,
+      };
+      const userFound = await loginUser(loginDetails);
+      if (userFound.username) {
+        this.setCurrentUser(userFound);
+        localStorage.setItem('loggedUser', JSON.stringify(userFound));
+        this.$router.push({ path: '/' });
+      } else {
+        this.message = 'Username or password is incorrect!';
+      }
     },
   },
 };
@@ -54,5 +80,22 @@ export default {
 .form-container {
   margin: 0 auto;
   max-width: 700px;
+
+  &__message {
+    color: #ee0000;
+    min-height: 24px;
+    position: relative;
+    bottom: 6px;
+  }
+
+  .success {
+    color: #008000;
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
 }
 </style>

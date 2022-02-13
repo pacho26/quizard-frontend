@@ -1,15 +1,30 @@
 <template>
   <div class="content-container">
     <nav>
-      <nuxt-link to="login"
-        ><b-button class="blue" variant="primary">Login</b-button></nuxt-link
-      >
+      <nuxt-link to="/">Logo</nuxt-link>
+      <nuxt-link to="/login">{{ currentUser ? 'Logout' : 'Login' }}</nuxt-link>
     </nav>
     <main>
       <Nuxt />
     </main>
   </div>
 </template>
+
+<script>
+import { mapActions, mapState } from 'vuex';
+export default {
+  async created() {
+    await this.loadCategories();
+    await this.loadUsers();
+  },
+  computed: {
+    ...mapState(['currentUser']),
+  },
+  methods: {
+    ...mapActions(['loadCategories', 'loadUsers']),
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 .content-container {
@@ -18,13 +33,14 @@
 
   nav {
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
   }
 
   main {
-    // TODO: temporary margins
-    margin-top: 40px;
-    margin-bottom: 40px;
+    // TODO: Temporary margins
+    margin: 40px 0 80px;
   }
 }
 </style>
