@@ -3,9 +3,6 @@
     <div class="question__input">
       <b-input-group :prepend="question.question">
         <b-form-input class="answer-input"></b-form-input>
-        <!-- <b-input-group-append> -->
-        <!-- <b-button variant="info">Button</b-button> -->
-        <!-- </b-input-group-append> -->
       </b-input-group>
     </div>
 

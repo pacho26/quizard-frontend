@@ -35,10 +35,12 @@ nav {
   justify-content: space-between;
 
   .image-container {
-    padding: 10px;
+    padding: 8px;
     cursor: pointer;
     -webkit-filter: grayscale(0.5);
     transition: 0.2s ease-in-out;
+    position: relative;
+    right: 8px;
 
     &:hover {
       -webkit-filter: grayscale(0);

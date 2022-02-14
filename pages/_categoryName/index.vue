@@ -3,7 +3,9 @@
     <div v-if="quizzes">
       <QuizCard v-for="quiz in quizzes" :key="quiz._id" :quiz="quiz" />
     </div>
-    <b-button class="add-btn mt-5" variant="dark">Add new quiz</b-button>
+    <nuxt-link to="/geography/new-quiz">
+      <b-button class="add-btn mt-5" variant="dark">Add new quiz</b-button>
+    </nuxt-link>
   </div>
 </template>
 

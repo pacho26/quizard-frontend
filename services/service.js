@@ -58,12 +58,37 @@ const getQuizById = async (quizId) => {
   }
 };
 
+const getLastQuiz = async () => {
+  try {
+    const { data: quiz } = await axios.get(`${apiRoot}/last-quiz`);
+    return quiz;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const addQuiz = async (quiz) => {
+  try {
+    await axios.post(`${apiRoot}/add-quiz`, quiz);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 const getQuestionsByQuizId = async (quizId) => {
   try {
     const { data: questions } = await axios.post(`${apiRoot}/questions`, {
       quizId,
     });
     return questions;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const addQuestion = async (question) => {
+  try {
+    await axios.post(`${apiRoot}/add-question`, question);
   } catch (err) {
     console.error(err);
   }
@@ -76,5 +101,8 @@ export {
   getCategories,
   getQuizzesByCategoryName,
   getQuizById,
+  getLastQuiz,
+  addQuiz,
   getQuestionsByQuizId,
+  addQuestion,
 };
