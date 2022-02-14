@@ -12,10 +12,16 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 export default {
+  async created() {
+    await this.loadCategories();
+  },
   computed: {
     ...mapState(['categories']),
+  },
+  methods: {
+    ...mapActions(['loadCategories']),
   },
 };
 </script>

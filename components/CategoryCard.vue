@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="`${category.name.toLowerCase()}`">
+  <nuxt-link :to="category.name.toLowerCase()">
     <div class="category">
       <img
         :src="require(`../assets/img/${category.name.toLowerCase()}.png`)"

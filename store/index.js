@@ -4,6 +4,7 @@ export const state = () => ({
   categories: [],
   users: [],
   currentUser: null,
+  isQuizOver: false,
 });
 
 export const getters = {
@@ -38,6 +39,9 @@ export const mutations = {
   setCurrentUser(state, user) {
     state.currentUser = user;
   },
+  setIsQuizOver(state, isOver) {
+    state.isQuizOver = isOver;
+  },
 };
 
 export const actions = {
@@ -51,5 +55,8 @@ export const actions = {
   },
   async setCurrentUser({ commit }, user) {
     commit('setCurrentUser', user);
+  },
+  async setIsQuizOver({ commit }, isOver) {
+    commit('setIsQuizOver', isOver);
   },
 };

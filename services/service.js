@@ -36,4 +36,45 @@ const getCategories = async () => {
   }
 };
 
-export { getUsers, registerUser, loginUser, getCategories };
+const getQuizzesByCategoryName = async (categoryName) => {
+  try {
+    const { data: quizzes } = await axios.post(`${apiRoot}/quizzes`, {
+      categoryName,
+    });
+    return quizzes;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const getQuizById = async (quizId) => {
+  try {
+    const { data: quiz } = await axios.post(`${apiRoot}/quiz-name`, {
+      quizId,
+    });
+    return quiz;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const getQuestionsByQuizId = async (quizId) => {
+  try {
+    const { data: questions } = await axios.post(`${apiRoot}/questions`, {
+      quizId,
+    });
+    return questions;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export {
+  getUsers,
+  registerUser,
+  loginUser,
+  getCategories,
+  getQuizzesByCategoryName,
+  getQuizById,
+  getQuestionsByQuizId,
+};

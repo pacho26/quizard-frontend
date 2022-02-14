@@ -51,13 +51,16 @@ export default {
   created() {
     this.setCurrentUser(null);
   },
+  mounted() {
+    localStorage.removeItem('loggedUser');
+  },
   computed: {
     ...mapGetters(['getUsernames', 'getUserByUsername']),
   },
   methods: {
     ...mapActions(['setCurrentUser']),
-    async onSubmit(event) {
-      event.preventDefault();
+    async onSubmit(ev) {
+      ev.preventDefault();
 
       const loginDetails = {
         username: this.form.username,
