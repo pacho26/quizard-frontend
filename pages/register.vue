@@ -47,6 +47,14 @@
           ></b-form-input>
         </b-form-group>
 
+        <b-form-checkbox
+          id="checkbox-1"
+          v-model="form.isAdmin"
+          name="checkbox-1"
+        >
+          Register as admin
+        </b-form-checkbox>
+
         <p class="form-container__message" ref="message">{{ message }}</p>
 
         <b-button type="submit" :variant="inputsEntered ? 'success' : 'danger'"
@@ -71,6 +79,7 @@ export default {
         repeatPassword: '',
         fullName: '',
         email: '',
+        isAdmin: false,
       },
 
       message: '',
@@ -81,8 +90,10 @@ export default {
     inputsEntered() {
       let allInputsEntered = true;
       Object.entries(this.form).map(([key, value]) => {
-        if (!value.trim()) {
-          allInputsEntered = false;
+        if (key !== 'isAdmin') {
+          if (!value.trim()) {
+            allInputsEntered = false;
+          }
         }
       });
       return allInputsEntered;
@@ -133,6 +144,7 @@ main {
     &__message {
       color: #ee0000;
       min-height: 24px;
+      margin-top: 24px;
       position: relative;
       bottom: 6px;
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="new-quiz-form">
+  <div class="new-quiz-form" v-if="isCurrentUserAdmin">
     <div class="quiz-details">
       <div class="quiz-name">
         <b-input-group prepend="Quiz name">
@@ -59,6 +59,12 @@ export default {
       numberOfQuestions: 1,
       message: '',
     };
+  },
+  computed: {
+    ...mapGetters(['getCurrentUser']),
+    isCurrentUserAdmin() {
+      return this.getCurrentUser?.isAdmin;
+    },
   },
   methods: {
     addNewQuestion() {

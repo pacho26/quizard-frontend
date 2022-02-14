@@ -75,6 +75,15 @@ const addQuiz = async (quiz) => {
   }
 };
 
+const deleteQuiz = async (id) => {
+  try {
+    console.log(id);
+    await axios.delete(`${apiRoot}/quizzes`, { data: { id: id } });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 const getQuestionsByQuizId = async (quizId) => {
   try {
     const { data: questions } = await axios.post(`${apiRoot}/questions`, {
@@ -103,6 +112,7 @@ export {
   getQuizById,
   getLastQuiz,
   addQuiz,
+  deleteQuiz,
   getQuestionsByQuizId,
   addQuestion,
 };
