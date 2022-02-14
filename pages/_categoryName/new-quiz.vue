@@ -51,6 +51,7 @@
 
 <script>
 import { addQuiz, getLastQuiz, addQuestion } from '../../services/service';
+import { mapGetters } from 'vuex';
 export default {
   data() {
     return {

@@ -77,8 +77,15 @@ const addQuiz = async (quiz) => {
 
 const deleteQuiz = async (id) => {
   try {
-    console.log(id);
-    await axios.delete(`${apiRoot}/quizzes`, { data: { id: id } });
+    await axios.delete(`${apiRoot}/quizzes`, { data: { id } });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const editQuiz = async (quiz) => {
+  try {
+    await axios.put(`${apiRoot}/quizzes`, quiz);
   } catch (err) {
     console.error(err);
   }
@@ -113,6 +120,7 @@ export {
   getLastQuiz,
   addQuiz,
   deleteQuiz,
+  editQuiz,
   getQuestionsByQuizId,
   addQuestion,
 };

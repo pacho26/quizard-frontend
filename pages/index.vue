@@ -8,6 +8,8 @@
         :category="category"
       />
     </div>
+
+    <BaseQuote />
   </main>
 </template>
 
