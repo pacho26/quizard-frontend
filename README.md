@@ -1,6 +1,5 @@
-# quizard
+# quizard <img src="https://raw.githubusercontent.com/pacho26/quizard-frontend/03f8f14f3eca4ffe87f83c309ce305a7757b1102/assets/img/quizard-logo.svg" width="120">
 
-<img src="https://raw.githubusercontent.com/pacho26/quizard-frontend/03f8f14f3eca4ffe87f83c309ce305a7757b1102/assets/img/quizard-logo.svg" width="120">
 
 ## Build Setup
 
